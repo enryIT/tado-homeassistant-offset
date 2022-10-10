@@ -21,7 +21,7 @@ variables:
   tolerance: 1
   target_tado: !input target_tado
   source_temp_sensor: !input source_temp_sensor
-  early_start: ("binary_sensor." ~ target_tado ~ "_early_start")|regex_replace("climate.", ignorecase=True)
+  #early_start: ("binary_sensor." ~ target_tado ~ "_early_start")|regex_replace("climate.", ignorecase=True)
   tado_temp: "{{ state_attr(target_tado, 'current_temperature') | float }}" # Temp tado thinks it's at
   current_offset: "{{ state_attr(target_tado, 'offset_celsius') }}" # Tado sensors offset
   tado_real_temp: "{{ ( tado_temp - current_offset) | float }}" # The temperature measured at the tado sensor
@@ -54,7 +54,7 @@ condition:
 - "{{ tado_temp|int != 0 or tado_temp == '0' }}"
 - "{{ actual_temp|int != 0 or actual_temp == '0' }}"
 # Only run if the climate device is preset is 'home' or if 'early start' has been activated or offset is more than a difference of 2
-- "{{ state_attr(target_tado, 'preset_mode') == 'home' or states(early_start) == 'on' }}"
+- "{{ state_attr(target_tado, 'preset_mode') == 'home' }}"
 # Only run if new offset is different to current offset
 - "{{ offset != 0 }}"
 # Only run if there is a difference in temperature greater than the tolerance
