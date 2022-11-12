@@ -18,7 +18,7 @@ blueprint:
           domain: climate
 
 variables:
-  tolerance: 1
+  tolerance: 0.5
   target_tado: !input target_tado
   source_temp_sensor: !input source_temp_sensor
   #early_start: ("binary_sensor." ~ target_tado ~ "_early_start")|regex_replace("climate.", ignorecase=True)
